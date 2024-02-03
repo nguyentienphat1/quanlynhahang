@@ -5,6 +5,7 @@ public class Branch {
     private String name;
     private Address location;
     private ArrayList<Employee> listEmployee;
+    private  String asd;
     private KitChen kitchen;
     private Menu menu;
     private ArrayList<TabLeChart> tabLeCharts;
