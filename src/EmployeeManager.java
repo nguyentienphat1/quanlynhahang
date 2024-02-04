@@ -1074,6 +1074,62 @@ public class EmployeeManager {
                     int idorder = scanner.nextInt();
                     for (int i = 0; i < orderArrayList.size(); i++){
                         if (orderArrayList.get(i).getOrderID() == idorder){
+                            System.out.println("1 : Received");
+                            System.out.println("2 : Preparing");
+                            System.out.println("3 : Complete");
+                            System.out.println("4 : Canceled");
+                            System.out.println("5 : None");
+                            System.out.println(" moi chon");
+                            int chonupdateorder = scanner.nextInt();
+                            switch (chonupdateorder){
+                                case 1 :
+                                    orderArrayList.get(i).setStatus(OrderStatus.Received);
+                                    break;
+                                case 2:
+                                    orderArrayList.get(i).setStatus(OrderStatus.Preparing);
+                                    break;
+                                case 3:
+                                    orderArrayList.get(i).setStatus(OrderStatus.Complete);
+                                    break;
+                                case 4 :
+                                    orderArrayList.get(i).setStatus(OrderStatus.Canceled);
+                                    break;
+                                case 5 :
+                                    orderArrayList.get(i).setStatus(OrderStatus.None);
+                                    break;
+                            }
+                            System.out.println("nhap id table can update");
+                            int tableID= scanner.nextInt();
+                            orderArrayList.get(i).getTabLe().setTabLeID(tableID);
+                            System.out.println("nhap maxcapacity can update");
+                            int maxCaPaCity = scanner.nextInt();
+                            orderArrayList.get(i).getTabLe().setMaxCaPaCity(maxCaPaCity);
+                            System.out.println("nhap location identifier can update");
+                            int location = scanner.nextInt();
+                            orderArrayList.get(i).getTabLe().setLocationidentifier(location);
+                            int chonupdatetable = scanner.nextInt();
+                            System.out.println(" ");
+                            System.out.println("1 : Free");
+                            System.out.println("2 : Reserved");
+                            System.out.println("3 : Occupied");
+                            System.out.println("4 : Other");
+                            System.out.println(" moi chon");
+                            switch (chonupdatetable){
+                                case 1 :
+                                    orderArrayList.get(i).getTabLe().setStatus(TableStatus.Free);
+                                    break;
+                                case 2 :
+                                    orderArrayList.get(i).getTabLe().setStatus(TableStatus.Reserved);
+                                    break;
+                                case 3 :
+                                    orderArrayList.get(i).getTabLe().setStatus(TableStatus.Occupied);
+                                    break;
+                                case 4 :
+                                    orderArrayList.get(i).getTabLe().setStatus(TableStatus.Other);
+                                    break;
+                            }
+                            int mealID = scanner.nextInt();
+                            orderArrayList.get(i).getMeal().setMealID(mealID);
 
                         }
                     }
