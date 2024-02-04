@@ -143,7 +143,7 @@ public class EmployeeManager {
 
         String password = "123456789";
         employee.setPhonestar("+84");
-
+        employee.setNameBranch("tien phat 1");
         employee.getAccountEmployee().setId(id);
         employee.getAccountEmployee().setPassword(password);
         employee.setEmployeeType(EmployeeTypeStatus.Manager);
@@ -163,42 +163,82 @@ public class EmployeeManager {
         System.out.println(" ");
         System.out.println("nhap lai password tuong tu");
         String samepassword = scanner.nextLine();
-        while (!checkAccount(employee.getAccountEmployee().getId(), employee.getAccountEmployee().getPassword(), samepassword)) {
-            System.out.println(" ");
-            System.out.println("vui long nhap lai");
-            System.out.println(" ");
-            System.out.println("nhap id account");
-            String id = scanner.nextLine();
-            scanner.nextLine();
-            employee.getAccountEmployee().setId(id);
-            System.out.println("nhap password account");
-            String password = scanner.nextLine();
-            employee.getAccountEmployee().setPassword(password);
-            System.out.println("nhap lai password tuong tu");
-            samepassword = scanner.nextLine();
+//        while (!checkAccount(employee.getAccountEmployee().getId(), employee.getAccountEmployee().getPassword(), samepassword)) {
+//            System.out.println(" ");
+//            System.out.println("vui long nhap lai");
+//            System.out.println(" ");
+//            System.out.println("nhap id account");
+//            String id = scanner.nextLine();
+//            scanner.nextLine();
+//            employee.getAccountEmployee().setId(id);
+//            System.out.println("nhap password account");
+//            String password = scanner.nextLine();
+//            employee.getAccountEmployee().setPassword(password);
+//            System.out.println("nhap lai password tuong tu");
+//            samepassword = scanner.nextLine();
+//        }
+//
+//        while (!checkEmailAccount(employee.getEmail())) {
+//            System.out.println("vui long nhap lai email");
+//            String email = scanner.nextLine();
+//            employee.setEmail(email);
+//        }
+//
+//        while (!checkphone(employee.getPhone())) {
+//            System.out.println("vui long nhap lai phone");
+//            String phone = scanner.nextLine();
+//            employee.setPhone(phone);
+//        }
+//
+//        while (!checkidEmployee(employee.getEmployeeID())) {
+//            System.out.println("vui long nhap lai");
+//            System.out.println("nhap id Employee");
+//            int idEmployye = scanner.nextInt();
+//            employee.setEmployeeID(idEmployye);
+//        }
+        while (true){
+            if (checkAccount(employee.getAccountEmployee().getId(), employee.getAccountEmployee().getPassword(), samepassword)){
+                if (checkEmailAccount(employee.getEmail())){
+                    if (checkphone(employee.getPhone())){
+                        if (checkidEmployee(employee.getEmployeeID())){
+                            break;
+                        }else {
+                            System.out.println("vui long nhap lai phone");
+                          String phone = scanner.nextLine();
+                          employee.setPhone(phone);
+                        }
+                    }else {
+                        System.out.println("vui long nhap lai phone");
+                        String phone = scanner.nextLine();
+                        employee.setPhone(phone);
+                    }
+                }else {
+                    System.out.println("vui long nhap lai email");
+                    String email = scanner.nextLine();
+                    employee.setEmail(email);
+                }
+            }else {
+                System.out.println(" ");
+                System.out.println("vui long nhap lai");
+                System.out.println(" ");
+                System.out.println("nhap id account");
+                scanner.nextLine();
+                String id = scanner.nextLine();
+                employee.getAccountEmployee().setId(id);
+                System.out.println("nhap password account");
+                String password = scanner.nextLine();
+                employee.getAccountEmployee().setPassword(password);
+                System.out.println("nhap lai password tuong tu");
+                samepassword = scanner.nextLine();
+            }
         }
-
-        while (!checkEmailAccount(employee.getEmail())) {
-            System.out.println("vui long nhap lai email");
-            String email = scanner.nextLine();
-            employee.setEmail(email);
-        }
-
-        while (!checkphone(employee.getPhone())) {
-            System.out.println("vui long nhap lai phone");
-            String phone = scanner.nextLine();
-            employee.setPhone(phone);
-        }
-
-        while (!checkidEmployee(employee.getEmployeeID())) {
-            System.out.println("vui long nhap lai");
-            System.out.println("nhap id Employee");
-            int idEmployye = scanner.nextInt();
-            employee.setEmployeeID(idEmployye);
-        }
-
         System.out.println("chao mung thanh vien moi");
         listemployee.add(employee);
+        for (int i = 0; i < restauRant.listBranch.size(); i++){
+            if (employee.getNameBranch().equals(restauRant.getListBranch().get(i).getName())) {
+                restauRant.getListBranch().get(i).getListEmployee().add(employee);
+            }
+        }
         return true;
     }
 
@@ -342,10 +382,9 @@ public class EmployeeManager {
 
         for (int i = 0; i < listemployee.size(); i++) {
             if (listemployee.get(i).getAccountEmployee().getId().equals(id)) {
-                System.out.println("id da ton tai");
+                System.out.println("id account da ton tai");
                 return false;
             }
-
         }
         if (!password.equals(samepassword)) {
             System.out.println("password khong trung");
@@ -639,7 +678,9 @@ public class EmployeeManager {
             int chon = scanner.nextInt();
             switch (chon) {
                 case 1:
-                    tabLeChart.outPut();
+                    for (int i = 0; i < tabLeChartArrayList.size(); i++){
+                        tabLeChartArrayList.get(i).outPut();
+                    }
                     break;
                 case 2:
                     System.out.println("nhap tabLeChartID ca update");
@@ -832,8 +873,11 @@ public class EmployeeManager {
                     nowEmployee.output();
                     break;
                 case 9:
-                    branch.setTabLeCharts(tabLeChartArrayList);
-                    branch.output();
+                    for (int i = 0; i < restauRant.listBranch.size(); i++){
+                        restauRant.getListBranch().get(i).setTabLeCharts(tabLeChartArrayList);
+                        restauRant.listBranch.get(i).output();
+                    }
+                    break;
                 case 0:
                     nowEmployee = new Employee();
                     System.out.println("goodbye");
@@ -855,7 +899,7 @@ public class EmployeeManager {
         MealItem mealItem = new MealItem();
         Order order = new Order();
         TabLeChart tabLeChart = new TabLeChart();
-        Employee employee = new Employee();
+
         Reserve reserve = new Reserve();
         TableReservation tableReservation = new TableReservation();
         Table table = new Table();
@@ -1055,7 +1099,7 @@ public class EmployeeManager {
                     PlaceOrder(meal,mealItem,menuItem,order,table,tableSeat);
                     break;
                 case 15:
-
+                    Employee employee = new Employee();
                     boolean contunue = true;
                     do {
                         System.out.println("1 : nhan vien Chef");
@@ -1089,13 +1133,13 @@ public class EmployeeManager {
                     System.out.println("dang ky tai khoan");
                     employee.input();
                     RegisterAnAccount(employee);
-                    if (employee.getEmployeeType().equals(EmployeeTypeStatus.Chef)) {
-                        employee = new Chef();
-                        ((Chef) employee).setListOrder(orderArrayList);
-                    } else if (employee.getEmployeeType().equals(EmployeeTypeStatus.Waiter)) {
-                        employee = new Waiter();
-                        ((Waiter) employee).setListOrder(orderArrayList);
-                    }
+//                    if (employee.getEmployeeType().equals(EmployeeTypeStatus.Chef)) {
+//                        employee = new Chef();
+//                        ((Chef) employee).setListOrder(orderArrayList);
+//                    } else if (employee.getEmployeeType().equals(EmployeeTypeStatus.Waiter)) {
+//                        employee = new Waiter();
+//                        ((Waiter) employee).setListOrder(orderArrayList);
+//                    }
                     break;
                 case 16:
                     deleteAccount();
@@ -1226,10 +1270,15 @@ public class EmployeeManager {
                     }
                     break;
                 case 22:
+                    informationRestaurant();
+                    for (int i = 0; i < restauRant.listBranch.size(); i++){
+                        restauRant.listBranch.get(i).setTabLeCharts(tabLeChartArrayList);
+                    }
                     restauRant.output();
                     break;
                 case 23:
-
+                    restauRant.addBranch();
+                    break;
                 case 0:
                     nowEmployee = new Employee();
                     System.out.println("goodbye");

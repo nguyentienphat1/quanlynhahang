@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Manager extends Employee {
     private ArrayList<EmployeeManager> listEmployeeManager;
 
-    public Manager(String name, String email, String phone, String phoneStar, int employeeID, Date dateJoined, Account accountEmployee, String employeeType, ArrayList<EmployeeManager> listEmployeeManager) {
-        super(name, email, phone, phoneStar, employeeID, dateJoined, accountEmployee, employeeType);
+    public Manager(String name, String email, String phone, String phoneStar, int employeeID, Date dateJoined, Account accountEmployee, String employeeType, ArrayList<EmployeeManager> listEmployeeManager, String nameBranch) {
+        super(name, email, phone, phoneStar, employeeID, dateJoined, accountEmployee, employeeType,nameBranch);
         this.listEmployeeManager = listEmployeeManager;
     }
 

@@ -29,6 +29,7 @@ public  class Employee extends Person {
         this.dateJoined = new Date();
         this.accountEmployee = new Account();
         this.employeeType = null;
+        this.nameBranch = null;
     }
 
     public int getEmployeeID() {
@@ -63,17 +64,29 @@ public  class Employee extends Person {
         this.employeeType = employeeType;
     }
 
+    public String getNameBranch() {
+        return nameBranch;
+    }
+
+    public void setNameBranch(String nameBranch) {
+        this.nameBranch = nameBranch;
+    }
+
     public void input(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhap id employee");
         employeeID = scanner.nextInt();
         super.inPut();
+        scanner.nextLine();
+        System.out.println("nhap name branch cua employee");
+        nameBranch = scanner.nextLine();
         dateJoined = new Date();
         accountEmployee.nhap();
     }
 
     public void output(){
         super.outPut();
+        System.out.println("name branch cua employee: "+ getNameBranch());
         System.out.println("employeeID : " + getEmployeeID());
         System.out.println("date : "+getDateJoined());
         System.out.println("employeeType : "+getEmployeeType());

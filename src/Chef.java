@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Chef extends Employee {
     private ArrayList<Order> listOrder;
 
-    public Chef(String name, String email, String phone, String phoneStar, int employeeID, Date dateJoined, Account accountEmployee, String employeeType, ArrayList<Order> listOrder) {
-        super(name, email, phone, phoneStar, employeeID, dateJoined, accountEmployee, employeeType);
+    public Chef(String name, String email, String phone, String phoneStar, int employeeID, Date dateJoined, Account accountEmployee, String employeeType, ArrayList<Order> listOrder, String nameBranch) {
+        super(name, email, phone, phoneStar, employeeID, dateJoined, accountEmployee, employeeType,nameBranch);
         this.listOrder = listOrder;
     }
 

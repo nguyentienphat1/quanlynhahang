@@ -55,9 +55,10 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhap menuID");
         menuId = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("nhap title");
         titLe = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.println("nhap description");
         desCription = scanner.nextLine();
     }

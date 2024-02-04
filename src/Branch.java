@@ -5,7 +5,6 @@ public class Branch {
     private String name;
     private Address location;
     private ArrayList<Employee> listEmployee;
-    private  String asd;
     private KitChen kitchen;
     private Menu menu;
     private ArrayList<TabLeChart> tabLeCharts;
@@ -91,16 +90,19 @@ public class Branch {
             }
         }
         menu.input();
+        for (int i = 0; i < tabLeCharts.size(); i++){
+            tabLeCharts.get(i).input();
+        }
     }
 
     public void output(){
         System.out.println("name branch : "+getName());
-        for (int i = 0; i < listEmployee.size();i++){
-            listEmployee.get(i).output();
-        }
         location.xuat();
         kitchen.output();
         menu.output();
+        for (int i = 0; i < listEmployee.size();i++){
+            listEmployee.get(i).output();
+        }
         for (int i = 0; i < tabLeCharts.size(); i++){
             tabLeCharts.get(i).outPut();
         }
