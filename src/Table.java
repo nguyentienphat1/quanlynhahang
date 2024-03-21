@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Table {
-    private int tabLeID,maxCaPaCity,locationidentifier;
-    private String status;
+    private int tabLeID,maxCaPaCity;
+    private String status,locationidentifier;
     private ArrayList<Order> listOrder;
     private ArrayList<TableSeat> listTableSeat;
 
-    public Table(int tabLeID, int maxCaPaCity, int locationidentifier, String status, ArrayList<Order> listOrder, ArrayList<TableSeat> listTableSeat) {
+    public Table(int tabLeID, int maxCaPaCity, String locationidentifier, String status, ArrayList<Order> listOrder, ArrayList<TableSeat> listTableSeat) {
         this.tabLeID = tabLeID;
         this.maxCaPaCity = maxCaPaCity;
         this.locationidentifier = locationidentifier;
@@ -18,7 +18,7 @@ public class Table {
     public Table() {
         this.tabLeID = 0;
         this.maxCaPaCity = 0;
-        this.locationidentifier = 0;
+        this.locationidentifier = null;
         this.status = null;
         this.listOrder = new ArrayList<>();
         this.listTableSeat = new ArrayList<>();
@@ -40,11 +40,11 @@ public class Table {
         this.maxCaPaCity = maxCaPaCity;
     }
 
-    public int getLocationidentifier() {
+    public String getLocationidentifier() {
         return locationidentifier;
     }
 
-    public void setLocationidentifier(int locationidentifier) {
+    public void setLocationidentifier(String locationidentifier) {
         this.locationidentifier = locationidentifier;
     }
 
@@ -78,8 +78,20 @@ public class Table {
         tabLeID = scanner.nextInt();
         System.out.println("nhap maxCaPaCity");
         maxCaPaCity = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("nhap locationidentifier");
-        locationidentifier = scanner.nextInt();
+        locationidentifier = scanner.nextLine();
+            if (listTableSeat.size() == 0){
+                TableSeat tableSeat = new TableSeat();
+                tableSeat.input();
+                listTableSeat.add(tableSeat);
+            }
+             else {
+                for (int i = 0; i < listTableSeat.size(); i++) {
+                    listTableSeat.get(i).input();
+                }
+            }
+
         status = TableStatus.Other;
     }
 

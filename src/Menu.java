@@ -64,9 +64,8 @@ public class Menu {
     }
 
     public void output(){
-        System.out.println("menuID : "+getMenuId());
-        System.out.println("title Menu : "+getTitLe());
-        System.out.println("description : "+getDesCription());
+        System.out.println("\tmenuID \t\t\t  title Menu \t\t\t  description");
+        System.out.println(getMenuId()+"\t\t\t "+getTitLe()+" \t\t\t"+ getDesCription());
         for (int i =0; i < listMEnuSection.size(); i++){
             listMEnuSection.get(i).output();
         }

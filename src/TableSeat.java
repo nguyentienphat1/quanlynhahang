@@ -44,28 +44,7 @@ public class TableSeat {
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhap tableSeatNumber ");
         tableSeatNumber = scanner.nextInt();
-        System.out.println("1 : Regular");
-        System.out.println("2 : kid");
-        System.out.println("3 : Accesible");
-        System.out.println("4 : Other");
-        System.out.println(" moi chon ");
-        int chon = scanner.nextInt();
-        switch (chon){
-            case 1:
-                setType(SeatType.Regular);
-                break;
-            case 2:
-                setType(SeatType.kid);
-                break;
-            case 3:
-                setType(SeatType.Accesible);
-                break;
-            case 4:
-                setType(SeatType.Other);
-                break;
-            default:
-                System.out.println("vui long chon tu 1 den 4");
-        }
+        setType(TableStatus.Other);
         meal.nhap();
     }
 

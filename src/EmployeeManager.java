@@ -14,12 +14,13 @@ public class EmployeeManager {
     private ArrayList<TableReservation> tableReservationArrayList;
     private ArrayList<TabLeChart> tabLeChartArrayList;
     private RestauRant restauRant;
+    private ArrayList<Table> tableArrayList;
 
 
 
 
     public EmployeeManager(ArrayList<Employee> listemployee, Employee nowEmployee, ArrayList<Order> orderArrayList, ArrayList<MealItem> mealItemArrayList, ArrayList<MenuSection> menuSectionArrayList, ArrayList<MenuItem> menuItemArrayList
-    ,ArrayList<TableSeat> tableSeatArrayList,ArrayList<TableReservation> tableReservationArrayList,ArrayList<TabLeChart> tabLeChartArrayList,RestauRant restauRant) {
+    ,ArrayList<TableSeat> tableSeatArrayList,ArrayList<TableReservation> tableReservationArrayList,ArrayList<TabLeChart> tabLeChartArrayList,RestauRant restauRant,ArrayList<Table> tableArrayList) {
         this.listemployee = listemployee;
         this.nowEmployee = nowEmployee;
         accountManager();
@@ -31,6 +32,7 @@ public class EmployeeManager {
         this.tableReservationArrayList = tableReservationArrayList;
         this.tabLeChartArrayList = tabLeChartArrayList;
         this.restauRant = restauRant;
+        this.tableArrayList = tableArrayList;
     }
 
     public EmployeeManager(ArrayList<Employee> listemployee) {
@@ -51,6 +53,7 @@ public class EmployeeManager {
         this.tableReservationArrayList = new ArrayList<>();
         this.tabLeChartArrayList = new ArrayList<>();
         this.restauRant = new RestauRant();
+        this.tableArrayList = new ArrayList<>();
     }
 
     public ArrayList<Employee> getListemployee() {
@@ -123,6 +126,22 @@ public class EmployeeManager {
 
     public void setTabLeChartArrayList(ArrayList<TabLeChart> tabLeChartArrayList) {
         this.tabLeChartArrayList = tabLeChartArrayList;
+    }
+
+    public RestauRant getRestauRant() {
+        return restauRant;
+    }
+
+    public void setRestauRant(RestauRant restauRant) {
+        this.restauRant = restauRant;
+    }
+
+    public ArrayList<Table> getTableArrayList() {
+        return tableArrayList;
+    }
+
+    public void setTableArrayList(ArrayList<Table> tableArrayList) {
+        this.tableArrayList = tableArrayList;
     }
 
     public void accountManager() {
@@ -439,6 +458,7 @@ public class EmployeeManager {
             System.out.println("8 : view menu Item");
             System.out.println("9 : view meal");
             System.out.println("10 : view resevation");
+            System.out.println("11 : view table");
             System.out.println("0 : cancel");
             System.out.println("moi chon ");
             int chon = scanner.nextInt();
@@ -546,6 +566,11 @@ public class EmployeeManager {
                         reserve.getListtableReservation().get(i).outPut();
                     }
                     break;
+                case 11:
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        tableArrayList.get(i).output();
+                    }
+                    break;
                 case 0:
                     nowEmployee = new Employee();
                     System.out.println("hen gap lai");
@@ -569,6 +594,7 @@ public class EmployeeManager {
             System.out.println("2 : view Account");
             System.out.println("3 : update password");
             System.out.println("4 : update information");
+            System.out.println("5 : view table");
             System.out.println("0 : cancel");
             System.out.println("moi chon");
             int chon = scanner.nextInt();
@@ -642,6 +668,11 @@ public class EmployeeManager {
                         }
                     }
                     break;
+                case 5:
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        tableArrayList.get(i).output();
+                    }
+                    break;
                 case 0:
                     nowEmployee = new Employee();
                     System.out.println("goodbye");
@@ -665,14 +696,15 @@ public class EmployeeManager {
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("1 : view Table Chart");
-            System.out.println("2 : update Table Chart");
-            System.out.println("3 : reserve Table");
-            System.out.println("4 : update reservation");
-            System.out.println("5 : cancel reservation");
-            System.out.println("6 : update password");
-            System.out.println("7 :  update information");
-            System.out.println("8 : view account");
-            System.out.println("9 : wiew branch");
+//            System.out.println("2 : update Table Chart");
+            System.out.println("2 : reserve Table");
+            System.out.println("3 : update reservation");
+            System.out.println("4 : cancel reservation");
+            System.out.println("5 : update password");
+            System.out.println("6 :  update information");
+            System.out.println("7 : view account");
+            System.out.println("8 : wiew branch");
+            System.out.println("9 : view table");
             System.out.println("0 : cancel");
             System.out.println("moi chon ");
             int chon = scanner.nextInt();
@@ -682,20 +714,20 @@ public class EmployeeManager {
                         tabLeChartArrayList.get(i).outPut();
                     }
                     break;
+//                case 2:
+//                    System.out.println("nhap tabLeChartID ca update");
+//                    int tabLeChartID = scanner.nextInt();
+//                    tabLeChart.setTabLeChartID(tabLeChartID);
+//                    System.out.println("nhap tableChartlmage can update");
+//                    String tableChartlmage = scanner.nextLine();
+//                    tabLeChart.setTableChartlmage(tableChartlmage);
+//                    break;
                 case 2:
-                    System.out.println("nhap tabLeChartID ca update");
-                    int tabLeChartID = scanner.nextInt();
-                    tabLeChart.setTabLeChartID(tabLeChartID);
-                    System.out.println("nhap tableChartlmage can update");
-                    String tableChartlmage = scanner.nextLine();
-                    tabLeChart.setTableChartlmage(tableChartlmage);
-                    break;
-                case 3:
                     tableReservation.inPut();
                     tableReservationArrayList.add(tableReservation);
                     reserve.setListtableReservation(tableReservationArrayList);
                     break;
-                case 4:
+                case 3:
                     System.out.println("nhap id can update");
                     int idreservation = scanner.nextInt();
                     for (int i = 0; i < tableReservationArrayList.size(); i++){
@@ -771,7 +803,7 @@ public class EmployeeManager {
                             int maxCaPaCity = scanner.nextInt();
                             tableReservationArrayList.get(i).getTable().setMaxCaPaCity(maxCaPaCity);
                             System.out.println("nhap locationidentifier can update");
-                            int locationidentifier = scanner.nextInt();
+                            String locationidentifier = scanner.nextLine();
                             tableReservationArrayList.get(i).getTable().setLocationidentifier(locationidentifier);
                             System.out.println(" 1: Free");
                             System.out.println(" 2: Reserved");
@@ -798,7 +830,7 @@ public class EmployeeManager {
                         }
                     }
                     break;
-                case 5:
+                case 4:
                     System.out.println("nhap id can cancel");
                     int idupdate = scanner.nextInt();
                     for (int i =0; i < tableReservationArrayList.size(); i++){
@@ -807,14 +839,14 @@ public class EmployeeManager {
                         }
                     }
                     break;
-                case 6:
+                case 5:
                     for (int i = 0; i < listemployee.size(); i++) {
                         if (listemployee.get(i) == nowEmployee) {
                             listemployee.get(i).getAccountEmployee().resetPassword();
                         }
                     }
                     break;
-                case 7:
+                case 6:
                     for (int i = 0; i < listemployee.size(); i++) {
                         if (listemployee.get(i) == nowEmployee) {
                             System.out.println("nhap name can update");
@@ -869,13 +901,22 @@ public class EmployeeManager {
                         }
                     }
                     break;
-                case 8:
+                case 7:
                     nowEmployee.output();
                     break;
-                case 9:
+                case 8:
+                    System.out.println("vui long nhap ten nha hang can xem");
+                    String namebranch = scanner.nextLine();
                     for (int i = 0; i < restauRant.listBranch.size(); i++){
-                        restauRant.getListBranch().get(i).setTabLeCharts(tabLeChartArrayList);
-                        restauRant.listBranch.get(i).output();
+                        if (restauRant.listBranch.get(i).getName().equals(namebranch)){
+                            restauRant.getListBranch().get(i).setTabLeCharts(tabLeChartArrayList);
+                            restauRant.listBranch.get(i).output();
+                        }
+                    }
+                    break;
+                case 9:
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        tableArrayList.get(i).output();
                     }
                     break;
                 case 0:
@@ -898,8 +939,6 @@ public class EmployeeManager {
         Meal meal = new Meal();
         MealItem mealItem = new MealItem();
         Order order = new Order();
-        TabLeChart tabLeChart = new TabLeChart();
-
         Reserve reserve = new Reserve();
         TableReservation tableReservation = new TableReservation();
         Table table = new Table();
@@ -930,6 +969,10 @@ public class EmployeeManager {
             System.out.println("21 : view resevation");
             System.out.println("22 : view restaurant");
             System.out.println("23 : add branch");
+            System.out.println("24 : add table");
+            System.out.println("25 : update table");
+            System.out.println("26 : delete table");
+            System.out.println("27 : view table");
             System.out.println("0 : cancel");
             int chon = scanner.nextInt();
             switch (chon) {
@@ -941,16 +984,28 @@ public class EmployeeManager {
                     modifuMenuFunction(menu,menuSection,menuItem);
                     break;
                 case 3:
-                    tabLeChart.input();
-                    tabLeChartArrayList.add(tabLeChart);
+                    TabLeChart tabLeChart = new TabLeChart();
+                    System.out.println("nhap name can them table chart");
+                    scanner.nextLine();
+                    String tablechar = scanner.nextLine();
+                    for (int i = 0; i < restauRant.getListBranch().size(); i++){
+                        if (restauRant.listBranch.get(i).getName().equals(tablechar)){
+                            tabLeChart.input();
+                            tabLeChartArrayList.add(tabLeChart);
+                            restauRant.listBranch.get(i).getTabLeCharts().add(tabLeChart);
+                        }
+                    }
                     break;
                 case 4:
+
                     System.out.println("nhap id can update");
                     int idtable = scanner.nextInt();
-                    tabLeChart.setTabLeChartID(idtable);
-                    System.out.println("nhap tableChartlmage");
-                    String tableChartlmage = scanner.nextLine();
-                    tabLeChart.setTableChartlmage(tableChartlmage);
+                    for (int i = 0; i < restauRant.getListBranch().size(); i++){
+                        if (restauRant.getListBranch().get(i).getTabLeCharts().get(i).getTabLeChartID() == idtable){
+                            String tablechartlmage = scanner.nextLine();
+                            restauRant.getListBranch().get(i).getTabLeCharts().get(i).setTableChartlmage(tablechartlmage);
+                        }
+                    }
                     break;
                 case 5:
                     tableReservation.inPut();
@@ -1033,7 +1088,7 @@ public class EmployeeManager {
                             int maxCaPaCity = scanner.nextInt();
                             tableReservationArrayList.get(i).getTable().setMaxCaPaCity(maxCaPaCity);
                             System.out.println("nhap locationidentifier can update");
-                            int locationidentifier = scanner.nextInt();
+                            String locationidentifier = scanner.nextLine();
                             tableReservationArrayList.get(i).getTable().setLocationidentifier(locationidentifier);
                             System.out.println(" 1: Free");
                             System.out.println(" 2: Reserved");
@@ -1105,7 +1160,7 @@ public class EmployeeManager {
                             int maxCaPaCity = scanner.nextInt();
                             orderArrayList.get(i).getTabLe().setMaxCaPaCity(maxCaPaCity);
                             System.out.println("nhap location identifier can update");
-                            int location = scanner.nextInt();
+                            String location = scanner.nextLine();
                             orderArrayList.get(i).getTabLe().setLocationidentifier(location);
                             int chonupdatetable = scanner.nextInt();
                             System.out.println(" ");
@@ -1327,13 +1382,111 @@ public class EmployeeManager {
                     break;
                 case 22:
                     informationRestaurant();
+                    System.out.println("vui long nhap ten nha hang can xem");
+                    scanner.nextLine();
+                    String namebranch = scanner.nextLine();
                     for (int i = 0; i < restauRant.listBranch.size(); i++){
-                        restauRant.listBranch.get(i).setTabLeCharts(tabLeChartArrayList);
+                        if (restauRant.listBranch.get(i).getName().equals(namebranch)){
+                            restauRant.listBranch.get(i).output();
+                        }
                     }
-                    restauRant.output();
                     break;
                 case 23:
                     restauRant.addBranch();
+                    break;
+                case 24 :
+                    table.input();
+                    tableArrayList.add(table);
+                    break;
+                case 25:
+                    int dem =0;
+                    System.out.println("nhap id table can update");
+                    int idtableupdate = scanner.nextInt();
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        if (tableArrayList.get(i).getTabLeID() == idtableupdate){
+                            System.out.println("nhap locationidentifier ca sua");
+                            String locationidentifier = scanner.nextLine();
+                            tableArrayList.get(i).setLocationidentifier(locationidentifier);
+                            System.out.println("moi chon status can sua ");
+                            System.out.println("1 : Free");
+                            System.out.println("2 : Reserved");
+                            System.out.println("3 : Occupied");
+                            System.out.println("4 : Other");
+                            System.out.println("moi chon");
+                            int chonstatus = scanner.nextInt();
+                            switch (chonstatus){
+                                case 1:
+                                    tableArrayList.get(i).setStatus(TableStatus.Free);
+                                    break;
+                                case 2:
+                                    tableArrayList.get(i).setStatus(TableStatus.Reserved);
+                                    break;
+                                case 3:
+                                    tableArrayList.get(i).setStatus(TableStatus.Occupied);
+                                    break;
+                                case 4:
+                                    tableArrayList.get(i).setStatus(TableStatus.Other);
+                                    break;
+                            }
+                            System.out.println("nhap tableSeatNumber can update");
+                            int tableSeatNumber = scanner.nextInt();
+                            tableArrayList.get(i).getListTableSeat().get(i).setTableSeatNumber(tableSeatNumber);
+
+                            System.out.println("moi chon type can sua ");
+                            System.out.println("1 : Free");
+                            System.out.println("2 : Reserved");
+                            System.out.println("3 : Occupied");
+                            System.out.println("4 : Other");
+                            System.out.println("moi chon");
+                            int chontype = scanner.nextInt();
+                            switch (chontype){
+                                case 1:
+                                    tableArrayList.get(i).getListTableSeat().get(i).setType(TableStatus.Free);
+                                    break;
+                                case 2:
+                                    tableArrayList.get(i).getListTableSeat().get(i).setType(TableStatus.Reserved);
+                                    break;
+                                case 3:
+                                    tableArrayList.get(i).getListTableSeat().get(i).setType(TableStatus.Occupied);
+                                    break;
+                                case 4:
+                                    tableArrayList.get(i).getListTableSeat().get(i).setType(TableStatus.Other);
+                                    break;
+                            }
+                            System.out.println("nhap id meal can update");
+                            int mealid = scanner.nextInt();
+                            tableArrayList.get(i).getListTableSeat().get(i).getMeal().setMealID(mealid);
+
+                            System.out.println("nhap id mealiteam can update");
+                            int idMealIteam = scanner.nextInt();
+                            tableArrayList.get(i).getListTableSeat().get(i).getMeal().getListMealItem().get(i).setMealItemID(idMealIteam);
+
+                            System.out.println("nhap quantity can update ");
+                            int quantity = scanner.nextInt();
+                            tableArrayList.get(i).getListTableSeat().get(i).getMeal().getListMealItem().get(i).setQuanTity(quantity);
+                        }
+                        while (tableArrayList.get(i).getTabLeID() != idtableupdate){
+                            dem++;
+                            System.out.println("ban da nhap sai "+dem+" lan");
+                            if (dem == 3){
+                                System.out.println("ban da sai qua 3 lan, thoat ra");
+                            }
+                        }
+                    }
+                    break;
+                case 26:
+                    System.out.println("nhap id table can xoa ");
+                    int iddalete = scanner.nextInt();
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        if (tableArrayList.get(i).getTabLeID() == iddalete){
+                            tableArrayList.remove(i);
+                        }
+                    }
+                    break;
+                case 27:
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        tableArrayList.get(i).output();
+                    }
                     break;
                 case 0:
                     nowEmployee = new Employee();
@@ -1447,7 +1600,7 @@ public class EmployeeManager {
                         case 1:
                            menuSection.nhap();
                            menuSectionArrayList.add(menuSection);
-                           menu.setListMEnuSection(menuSectionArrayList);
+                           menu.getListMEnuSection().add(menuSection);
                            break;
                         case 2 :
                             System.out.println("moi nhap id can update");
@@ -1484,7 +1637,7 @@ public class EmployeeManager {
                         case 1:
                             menuItem.nhap();
                             menuItemArrayList.add(menuItem);
-                            menuSection.setListMenuItem(menuItemArrayList);
+                            menuSection.getListMenuItem().add(menuItem);
                             break;
                         case 2:
                             System.out.println("nhap id menu secsion can update");
