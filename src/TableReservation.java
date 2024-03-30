@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class TableReservation {
     private Table Table;
     private Reservation reserVaTion;
@@ -26,9 +28,8 @@ public class TableReservation {
     public void setReserVaTion(Reservation reserVaTion) {
         this.reserVaTion = reserVaTion;
     }
-
     public void inPut(){
-        Table.input();
+        Scanner scanner = new Scanner(System.in);
         reserVaTion.inPut();
     }
 

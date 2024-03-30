@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Table {
-    private int tabLeID,maxCaPaCity;
-    private String status,locationidentifier;
+    private int tabLeID, maxCaPaCity;
+    private String status, locationidentifier;
     private ArrayList<Order> listOrder;
     private ArrayList<TableSeat> listTableSeat;
 
@@ -15,6 +15,7 @@ public class Table {
         this.listOrder = listOrder;
         this.listTableSeat = listTableSeat;
     }
+
     public Table() {
         this.tabLeID = 0;
         this.maxCaPaCity = 0;
@@ -72,7 +73,7 @@ public class Table {
         this.listTableSeat = listTableSeat;
     }
 
-    public void input(){
+    public void input() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhap tabLeID");
         tabLeID = scanner.nextInt();
@@ -81,29 +82,21 @@ public class Table {
         scanner.nextLine();
         System.out.println("nhap locationidentifier");
         locationidentifier = scanner.nextLine();
-            if (listTableSeat.size() == 0){
-                TableSeat tableSeat = new TableSeat();
-                tableSeat.input();
-                listTableSeat.add(tableSeat);
-            }
-             else {
-                for (int i = 0; i < listTableSeat.size(); i++) {
-                    listTableSeat.get(i).input();
-                }
-            }
-
-        status = TableStatus.Other;
+        TableSeat tableSeat = new TableSeat();
+        tableSeat.input();
+        listTableSeat.add(tableSeat);
+        status = TableStatus.Free;
     }
 
-    public void output(){
-        System.out.println("tabLeID : "+getTabLeID());
-        System.out.println("maxCaPaCity : "+getMaxCaPaCity());
-        System.out.println("locationidentifier : "+getLocationidentifier());
-        System.out.println("status : "+getStatus());
-        for (int i = 0; i < listOrder.size(); i++){
+    public void output() {
+        System.out.println("tabLeID : " + getTabLeID());
+        System.out.println("maxCaPaCity : " + getMaxCaPaCity());
+        System.out.println("locationidentifier : " + getLocationidentifier());
+        System.out.println("status : " + getStatus());
+        for (int i = 0; i < listOrder.size(); i++) {
             listOrder.get(i).output();
         }
-        for (int i = 0; i < listTableSeat.size(); i++){
+        for (int i = 0; i < listTableSeat.size(); i++) {
             listTableSeat.get(i).output();
         }
     }

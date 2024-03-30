@@ -79,7 +79,9 @@ public class Order {
         OrderID = scanner.nextInt();
         Status = OrderStatus.None;
         chef.input();
-        tabLe.input();
+        System.out.println("nhap id ban can order");
+        int id = scanner.nextInt();
+        tabLe.setTabLeID(id);
         meal.nhap();
     }
 
@@ -88,7 +90,7 @@ public class Order {
         System.out.println("status : "+getStatus());
         waiTer.output();
         chef.output();
-        tabLe.output();
+        System.out.println("id ban :"+ tabLe.getTabLeID());
         meal.output();
     }
 

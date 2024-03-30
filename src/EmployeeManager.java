@@ -222,9 +222,9 @@ public class EmployeeManager {
                         if (checkidEmployee(employee.getEmployeeID())){
                             break;
                         }else {
-                            System.out.println("vui long nhap lai phone");
-                          String phone = scanner.nextLine();
-                          employee.setPhone(phone);
+                            System.out.println("vui long nhap lai id");
+                            int id = scanner.nextInt();
+                            employee.setEmployeeID(id);
                         }
                     }else {
                         System.out.println("vui long nhap lai phone");
@@ -240,10 +240,10 @@ public class EmployeeManager {
                 System.out.println(" ");
                 System.out.println("vui long nhap lai");
                 System.out.println(" ");
-                System.out.println("nhap id account");
                 scanner.nextLine();
-                String id = scanner.nextLine();
-                employee.getAccountEmployee().setId(id);
+                System.out.println("nhap id account");
+                String idaccount = scanner.nextLine();
+                employee.getAccountEmployee().setId(idaccount);
                 System.out.println("nhap password account");
                 String password = scanner.nextLine();
                 employee.getAccountEmployee().setPassword(password);
@@ -442,7 +442,7 @@ public class EmployeeManager {
         TableSeat tableSeat = new TableSeat();
         boolean contuneu = true;
         Menu menu = new Menu();
-        Order order = new Order();
+
         MenuItem menuItem = new MenuItem();
         MenuSection menuSection = new MenuSection();
         Meal meal = new Meal();
@@ -459,6 +459,8 @@ public class EmployeeManager {
             System.out.println("9 : view meal");
             System.out.println("10 : view resevation");
             System.out.println("11 : view table");
+            System.out.println("12 : view reservation");
+            System.out.println("13 : oder resevartion");
             System.out.println("0 : cancel");
             System.out.println("moi chon ");
             int chon = scanner.nextInt();
@@ -468,6 +470,7 @@ public class EmployeeManager {
                     meal.setListMealItem(mealItemArrayList);
                     break;
                 case 2:
+                    Order order = new Order();
                     table.input();
                     tableSeat.input();
                     tableSeatArrayList.add(tableSeat);
@@ -569,6 +572,30 @@ public class EmployeeManager {
                 case 11:
                     for (int i = 0; i < tableArrayList.size(); i++){
                         tableArrayList.get(i).output();
+                    }
+                    break;
+                case 12:
+                    for (int i = 0; i < tableReservationArrayList.size(); i++){
+                        tableReservationArrayList.get(i).outPut();
+                    }
+                    break;
+                case 13:
+                    int dem = 0;
+                    System.out.println("nhap id ban can order");
+                    int idorder = scanner.nextInt();
+                    for (int i = 0; i < tableReservationArrayList.size(); i++){
+                       if (idorder == tableReservationArrayList.get(i).getTable().getTabLeID()){
+                           dem++;
+                       }
+                    }
+                    while (dem != 1){
+                        System.out.println(" id ban nay khong co trong danh sach dat ban");
+                        idorder = scanner.nextInt();
+                    }
+
+                    if (dem == 1){
+                        Order orderreservation = new Order();
+                        orderreservation.input();
                     }
                     break;
                 case 0:
@@ -690,13 +717,11 @@ public class EmployeeManager {
         TabLeChart tabLeChart = new TabLeChart();
         Reservation reservation = new Reservation();
         Branch branch = new Branch();
-        TableReservation tableReservation = new TableReservation();
         Reserve reserve = new Reserve();
         boolean contuneu = true;
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("1 : view Table Chart");
-//            System.out.println("2 : update Table Chart");
             System.out.println("2 : reserve Table");
             System.out.println("3 : update reservation");
             System.out.println("4 : cancel reservation");
@@ -705,6 +730,7 @@ public class EmployeeManager {
             System.out.println("7 : view account");
             System.out.println("8 : wiew branch");
             System.out.println("9 : view table");
+            System.out.println("10: view reservation");
             System.out.println("0 : cancel");
             System.out.println("moi chon ");
             int chon = scanner.nextInt();
@@ -714,16 +740,29 @@ public class EmployeeManager {
                         tabLeChartArrayList.get(i).outPut();
                     }
                     break;
-//                case 2:
-//                    System.out.println("nhap tabLeChartID ca update");
-//                    int tabLeChartID = scanner.nextInt();
-//                    tabLeChart.setTabLeChartID(tabLeChartID);
-//                    System.out.println("nhap tableChartlmage can update");
-//                    String tableChartlmage = scanner.nextLine();
-//                    tabLeChart.setTableChartlmage(tableChartlmage);
-//                    break;
                 case 2:
+                    System.out.println("moi xem danh sach ban con trong");
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        if (tableArrayList.get(i).getStatus().equals(TableStatus.Free)){
+                            tableArrayList.get(i).output();
+                        }
+                    }
+                    System.out.println("\n");
+                    System.out.println("nhap id ban can dat");
+                    int id = scanner.nextInt();
+                    TableReservation tableReservation = new TableReservation();
+                    while (!checkRervation(id)){
+                        System.out.println("xin nhap lai id table");
+                        id = scanner.nextInt();
+                    }
                     tableReservation.inPut();
+                    for (int i = 0; i < tableArrayList.size(); i++){
+                        if (id == tableArrayList.get(i).getTabLeID()) {
+                            tableArrayList.get(i).setStatus(TableStatus.Reserved);
+                            tableReservation.getTable().setStatus(TableStatus.Reserved);
+                        }
+                    }
+                    System.out.println("chuc mung ban da dat ban thanh cong");
                     tableReservationArrayList.add(tableReservation);
                     reserve.setListtableReservation(tableReservationArrayList);
                     break;
@@ -919,6 +958,11 @@ public class EmployeeManager {
                         tableArrayList.get(i).output();
                     }
                     break;
+                case 10:
+                    for (int i = 0; i < tableReservationArrayList.size(); i++){
+                        tableReservationArrayList.get(i).outPut();
+                    }
+                    break;
                 case 0:
                     nowEmployee = new Employee();
                     System.out.println("goodbye");
@@ -930,6 +974,26 @@ public class EmployeeManager {
         } while (contuneu);
     }
 
+    public boolean checkRervation(int tableId) {
+        int dem = 0;
+
+        for (int i = 0; i < tableArrayList.size(); i++) {
+            if (tableId == tableArrayList.get(i).getTabLeID()) {
+                dem++;
+                if (!tableArrayList.get(i).getStatus().equals(TableStatus.Free)) {
+                    System.out.println("xin loi ban nay khong trong");
+                    return false;
+                }
+            }
+
+        }
+        if (dem != 1){
+            System.out.println(" id table khong ton tai");
+            return false;
+        }else {
+            return true;
+        }
+    }
     public void menuManager() {
         System.out.println("chuc mung manager da dang nhap thanh cong");
         System.out.println("moi chon thao tac");
@@ -941,8 +1005,8 @@ public class EmployeeManager {
         Order order = new Order();
         Reserve reserve = new Reserve();
         TableReservation tableReservation = new TableReservation();
-        Table table = new Table();
         TableSeat tableSeat = new TableSeat();
+        Table table1 = new Table();
         boolean contuneu = true;
         Scanner scanner = new Scanner(System.in);
         do {
@@ -1207,7 +1271,7 @@ public class EmployeeManager {
                     System.out.println("Process payment");
                     break;
                 case 14:
-                    PlaceOrder(meal,mealItem,menuItem,order,table,tableSeat);
+                    PlaceOrder(meal,mealItem,menuItem,order,table1,tableSeat);
                     break;
                 case 15:
                     Employee employee = new Employee();
@@ -1395,6 +1459,8 @@ public class EmployeeManager {
                     restauRant.addBranch();
                     break;
                 case 24 :
+                    Table table = new Table();
+                    table1 = table;
                     table.input();
                     tableArrayList.add(table);
                     break;
@@ -1470,16 +1536,30 @@ public class EmployeeManager {
                             System.out.println("ban da nhap sai "+dem+" lan");
                             if (dem == 3){
                                 System.out.println("ban da sai qua 3 lan, thoat ra");
+                                break;
                             }
+                            System.out.println("vui long nhap lai id table can update");
+                            idupdate = scanner.nextInt();
                         }
                     }
                     break;
                 case 26:
+                    int demdelete = 0;
                     System.out.println("nhap id table can xoa ");
-                    int iddalete = scanner.nextInt();
+                    int iddelete = scanner.nextInt();
                     for (int i = 0; i < tableArrayList.size(); i++){
-                        if (tableArrayList.get(i).getTabLeID() == iddalete){
+                        if (tableArrayList.get(i).getTabLeID() == iddelete){
                             tableArrayList.remove(i);
+                        }
+                        while (tableArrayList.get(i).getTabLeID() != iddelete){
+                            demdelete++;
+                            System.out.println("ban da nhap sai "+demdelete+" lan");
+                            if (demdelete == 3){
+                                System.out.println("ban da sai qua 3 lan, thoat ra");
+                                break;
+                            }
+                            System.out.println("vui long nhap lai id table can xoa");
+                            iddelete = scanner.nextInt();
                         }
                     }
                     break;

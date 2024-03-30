@@ -34,6 +34,9 @@ public class Meal {
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhap id meal");
         mealID = scanner.nextInt();
+        MealItem mealItem = new MealItem();
+        mealItem.nhap();
+        listMealItem.add(mealItem);
     }
 
     public void output(){
