@@ -78,7 +78,12 @@ public class Order {
         System.out.println("nhap oderID");
         OrderID = scanner.nextInt();
         Status = OrderStatus.None;
-        chef.input();
+        System.out.println("nhap id nhan vien phuc vu");
+        int idWaiter = scanner.nextInt();
+        waiTer.setEmployeeID(idWaiter);
+        System.out.println("nhap id chef");
+        int idChef = scanner.nextInt();
+        chef.setEmployeeID(idChef);
         System.out.println("nhap id ban can order");
         int id = scanner.nextInt();
         tabLe.setTabLeID(id);
@@ -88,8 +93,8 @@ public class Order {
     public void output(){
         System.out.println("oderID : "+getOrderID());
         System.out.println("status : "+getStatus());
-        waiTer.output();
-        chef.output();
+        System.out.println("id waiter : "+waiTer.getEmployeeID());
+        System.out.println("id chef : "+chef.getEmployeeID());
         System.out.println("id ban :"+ tabLe.getTabLeID());
         meal.output();
     }
