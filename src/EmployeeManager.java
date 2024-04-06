@@ -581,21 +581,26 @@ public class EmployeeManager {
                     break;
                 case 13:
                     int dem = 0;
+                    Order orderreservartion = new Order();
                     System.out.println("nhap id ban can order");
                     int idorder = scanner.nextInt();
                     for (int i = 0; i < tableReservationArrayList.size(); i++){
-                       if (idorder == tableReservationArrayList.get(i).getTable().getTabLeID()){
-                           dem++;
-                       }
+                        if (tableReservationArrayList.get(i).getTable().getTabLeID() == idorder){
+                            dem++;
+                        }
                     }
-                    while (dem != 1){
-                        System.out.println(" id ban nay khong co trong danh sach dat ban");
-                        idorder = scanner.nextInt();
-                    }
-
                     if (dem == 1){
-                        Order orderreservation = new Order();
-                        orderreservation.input();
+                        orderreservartion.input();
+                        orderreservartion.getTabLe().setTabLeID(idorder);
+                    }
+                    else {
+                        System.out.println("id ban nay chua duoc dat truoc");
+                    }
+                    for (int i = 0; i < tableReservationArrayList.size(); i++){
+                        if (tableReservationArrayList.get(i).getTable().getTabLeID() == idorder){
+                            tableReservationArrayList.get(i).getTable().getListOrder().add(orderreservartion);
+                            orderArrayList.add(orderreservartion);
+                        }
                     }
                     break;
                 case 0:
@@ -755,7 +760,9 @@ public class EmployeeManager {
                         System.out.println("xin nhap lai id table");
                         id = scanner.nextInt();
                     }
+
                     tableReservation.inPut();
+                    tableReservation.getTable().setTabLeID(id);
                     for (int i = 0; i < tableArrayList.size(); i++){
                         if (id == tableArrayList.get(i).getTabLeID()) {
                             tableArrayList.get(i).setStatus(TableStatus.Reserved);
